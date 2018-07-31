@@ -1,0 +1,11 @@
+.radioBtn{
+    display: inline;
+    margin-left: 15%;
+    position: relative;
+    top: 20px;
+   font-size: 14px;
+}
+
+/* .radioBtn span {
+    margin-bottom: 15px;
+} */

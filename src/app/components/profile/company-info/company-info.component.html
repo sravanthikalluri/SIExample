@@ -1,0 +1,66 @@
+<div class="profile-info">
+  <h5 class="heading">
+    <span *ngIf="!canEdit">{{companyName}}</span>
+    <input type="text" *ngIf="canEdit" [(ngModel)]="companyName" />
+    <span  *ngIf="!canEdit" (click)="onEdit()"><i class="fas fa-pencil-alt pointer" ></i></span>
+    <span  *ngIf="canEdit" (click)="onSave()"><i class="fas fa-check pointer" ></i></span>
+    <span  *ngIf="canEdit" (click)="onSave()"><i class="fas fa-times pointer" ></i></span>
+</h5>
+<div class="photo-upload">
+  <div>
+    <img [src]="imagePath" alt="image" />
+  </div>
+  <div class="upload-options">
+    <p class="mb-0">Upload your logo..</p>
+    <p class="mb-0">Photo should be atleast 300px*300px</p>
+    <div id="upload_button">
+      <label>
+        <input type="file" (change)="uploadCompanyLogo($event)"/>
+        <span class="btn btn-primary upload-btn">Upload Logo</span>
+      </label>
+    </div>
+  </div>
+</div>
+  <h5 class="mt-3 heading">Change Password</h5>
+  <form [formGroup]="passwordForm">
+    <div class="form-group" [ngClass]="{
+        'has-danger': passwordForm.controls.cpassword.invalid && (passwordForm.controls.cpassword.dirty || passwordForm.controls.cpassword.touched) , 'has-success':isPasswordVerified}">
+      <div class="required-field">
+        <label for="cpassword">Verify Current Password</label>
+      </div>
+      <input type="password" class="form-control" formControlName="cpassword" id="cpassword" (keyup)="verifyPassword($event)" aria-describedby="cpassword">
+      <span *ngIf="isPasswordVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
+     <!--  <div *ngFor="let validation of validation_messages.cpassword">
+        <p class="error-message error" *ngIf="passwordForm.get('cpassword').hasError(validation.type) && (passwordForm.get('cpassword').dirty || passwordForm.get('cpassword').touched)">{{validation.message}}</p>
+      </div> -->
+    </div>
+    <div class="form-group" [ngClass]="{
+        'has-danger': passwordForm.controls.npassword.invalid && (passwordForm.controls.npassword.dirty || passwordForm.controls.npassword.touched) }">
+      <div class="required-field">
+         <label for="npassword">New Password</label>
+      </div>
+      <input type="password" class="form-control" formControlName="npassword"  id="npassword" (keyup)="newPasswordChange($event)" aria-describedby="npassword">
+      <div *ngFor="let validation of validation_messages.npassword">
+        <p class="error-message error" *ngIf="passwordForm.get('npassword').hasError(validation.type) && (passwordForm.get('npassword').dirty || passwordForm.get('npassword').touched)">{{validation.message}}</p>
+      </div>
+    </div>
+    <div class="form-group m-0">
+      <ul class="twocolumns">
+        <li *ngFor="let rule of passwordRules"><span>{{rule}}</span></li>
+      </ul>
+    </div>
+    <div class="form-group" [ngClass]="{
+        'has-danger': passwordForm.controls.cnfmpassword.invalid && (passwordForm.controls.cnfmpassword.dirty || passwordForm.controls.cnfmpassword.touched) }">
+      <div class="required-field">
+        <label for="cnfmpassword">Confirm New Password</label>
+      </div>
+      <input type="password" class="form-control" id="cnfmpassword" formControlName="cnfmpassword" (keyup)="confirmPasswordChange($event)" aria-describedby="cnfmpassword">
+      <div *ngFor="let validation of validation_messages.cnfmpassword">
+        <p class="error-message error" *ngIf="passwordForm.get('cnfmpassword').hasError(validation.type) && (passwordForm.get('cnfmpassword').dirty || passwordForm.get('cnfmpassword').touched)">{{validation.message}}</p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary upload-btn" (click)="updatePassword()">Update</button>
+  </form>
+  <div *ngIf="showMessage">Password updated successfully</div>
+</div>
+

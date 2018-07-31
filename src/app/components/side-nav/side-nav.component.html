@@ -1,0 +1,58 @@
+<div class="wrapper">
+  <app-user-details style="flex: 0 0 auto;width: 100%;"></app-user-details>
+  <div class="sideNavMenu">
+    <ul class="menuItems">
+    <!--  <li *ngFor="let menu of menus let parentIndex = index" (click)="menuClicked(menu,menu.name,parentIndex)"
+          [ngClass]="{ 'selected' : menu.name == currentMenu && (menu.link), 'active':menu.isActive}">
+        <div class="menuName"  [routerLink]="[menu.link?menu.link:[]]">
+        <span>
+            {{menu.name}}  
+        </span>
+          <span *ngIf="menu.subMenu && toggleMenu" class="chevronIcon">
+            <i class="fas fa-chevron-up"></i>
+          </span>
+          <span *ngIf="menu.subMenu && !toggleMenu" class="chevronIcon">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+        </div>          
+        <div *ngIf="menu.subMenu && toggleMenu" class="subMenuItems">
+          <ul class="subMenu" *ngIf="toggleMenu">
+            <li *ngFor="let subMenu of menu.subMenuItems"
+                [ngClass]="{ 'selected' : subMenu.name == activatedSubmenu , 'active':subMenu.isActive}"
+                (click)="subMenuClicked(subMenu,$event);"
+                [routerLink]="[subMenu.link]">
+              {{subMenu.name}} {{activatedSubmenu}}
+            </li>
+          </ul>
+        </div>
+      </li>-->
+      <li *ngFor="let menu of menus let parentIndex = index"
+          [ngClass]="{ 'selected active': menu.link && menu.name == currentMenu}"
+          (click)="menu.link ? navigateToLink(menu):showSubmenu()"
+          [routerLink]="menu.link?menu.link:[]" >
+        <div class="menuName" >
+          <span>
+              {{menu.name}}
+          </span>
+          <span *ngIf="menu.subMenu && toggleMenu" class="chevronIcon">
+            <i class="fas fa-chevron-up"></i>
+          </span>
+          <span *ngIf="menu.subMenu && !toggleMenu" class="chevronIcon">
+              <i class="fas fa-chevron-down"></i>
+            </span>
+        </div>
+
+        <div *ngIf="menu.subMenu && toggleMenu" class="subMenuItems">
+          <ul class="subMenu" *ngIf="toggleMenu">
+            <li *ngFor="let subMenu of menu.subMenuItems"
+                [ngClass]="{ 'selected active' : subMenu.name == currentMenu}"
+                (click)="subMenuClicked(subMenu,$event);"
+                [routerLink]="[subMenu.link]">
+              {{subMenu.name}}
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

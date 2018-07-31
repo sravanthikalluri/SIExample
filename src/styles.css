@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+.upload-btn {
+  background: rgb(84, 84, 84);
+  border: none;
+  font-size:14px;
+}
+.heading {
+  color: gray;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 15px;
+}
+.padding-1530 {
+  padding:15px 30px;
+}
+.form-group label,input {
+  font-size: 14px !important;
+  font-family: segoe ui regular;
+  color: #696969;
+  font-weight: 500;
+}
+.pointer {
+  cursor: pointer;
+}
+.required-field label {
+  position: relative;
+  padding-left: 10px;
+}
+.required-field label:before {
+  content: '*';
+  position: absolute;
+  left: 0;
+  top: -2px;
+  font-size: 20px;
+  color: #f22323;
+}
+.error {
+  color:#d9534f;
+}

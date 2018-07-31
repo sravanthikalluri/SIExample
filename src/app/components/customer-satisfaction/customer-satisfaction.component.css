@@ -1,0 +1,7 @@
+iframe {
+  width: 100%;
+  /*height: calc(100vh - 176px);*/
+  height: calc(100% - 35px);
+  overflow-y: auto;
+  float:left;
+}

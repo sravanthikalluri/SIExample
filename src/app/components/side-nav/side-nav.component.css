@@ -1,0 +1,90 @@
+.sideNavMenu {
+  background: #172C47;
+  color: darkgray;
+  font-size: 0.9em;
+  font-weight: 500;
+  flex: 1 1 auto;
+}
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.menuItems > li {
+  border-bottom: 1px solid white;
+  /*white-space: nowrap;*/
+  cursor: pointer;
+}
+
+.menuName {
+  padding: 10px;
+  font-size:14px;
+}
+
+.selected {
+  background: #EAEAEA;
+  color: #172C47;
+  width:100%;
+}
+
+.subMenu {
+  padding-top: 10px;
+  width: 100%;
+}
+
+.subMenu li {
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  font-size:12px;
+}
+
+.subMenuItems {
+  display: flex;
+  flex-direction: row;
+   width: 100%;
+}
+subMenuItems ::-webkit-scrollbar {
+  width: 12px;
+}
+
+
+.chevronIcon {
+  float: right;
+  cursor: pointer;
+  margin-right:3%;
+}
+
+.active{
+  color: darkturquoise;
+}
+
+
+
+/*@media only screen and (max-width: 990px) {
+  .selected {
+    background: #EAEAEA;
+    width: 136% !important;
+    color: darkturquoise;
+  }
+  
+}
+@media only screen and (max-width: 768px) {
+  .selected {
+    width: 100% !important;
+  }
+  .chevronIcon {
+    margin-right: 2%;
+  }
+}*/
+
+@media (min-width: 767px) and (max-width: 823px){
+  .chevronIcon {
+    margin-right: -7%;
+  }
+}
+
+.wrapper{
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}

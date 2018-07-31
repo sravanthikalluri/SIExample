@@ -1,0 +1,27 @@
+<!-- <div class="wrapper">
+
+  <div class="row">
+      <div class="col-md-2 col-lg-2 sideNav">
+          
+      </div>
+      <div class="col-md-10 col-lg-10" style="padding:0px;">
+                
+       
+         
+      </div>
+  </div>
+</div> -->
+<div class="v_wrapper" style="height:100vh;overflow: hidden;width: 100%; display:flex; flex-flow:column nowrap;">
+    <app-header style="flex:0 0 auto; width:100%" class="app-header"></app-header>
+    <div class="app-content" >
+        <app-side-nav (onSubMenuClicked)="subMenuClicked($event)" style="width:20rem;height: 100%;float:left" class="app-side-nav app-sidenav-wrapper"></app-side-nav>
+        <div class="content-right content-right2" style="width:calc(100% - 20rem);height: 100%;float:left; overflow:hidden;overflow-y:auto;display:flex; flex-flow:column nowrap;">
+           <div class="rightcontent-wrap">
+            <app-search style="flex:0 0 auto; padding: 0;"></app-search>
+            <router-outlet style="flex:1 0 auto;" class="router-outlet"></router-outlet>
+           </div> 
+           <app-footer style="flex:0 0 auto; padding: 1rem 0;margin: auto 0 0;" class="app-footer"></app-footer>
+        </div>
+    </div>
+
+</div>

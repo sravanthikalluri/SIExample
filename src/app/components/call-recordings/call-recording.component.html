@@ -1,0 +1,241 @@
+<!--<si-spinner *ngIf="loading"></si-spinner>
+
+<div *ngIf="!loading" class="mainContent">
+  <div class="eventClass">
+
+    <form class="search">
+      <input type="text" placeholder="Search.." [(ngModel)]="searchText" name="searchText">
+      <button type="submit" class="searchBtn">
+        <i class="fa fa-search"></i>
+      </button>
+
+      <app-selectlist [all]="getAllFilesCount()" [processing]="getProcessingFilesCount()" [completed]="getCompletedFilesCount()"
+        (countRadioButtonSelectionChanges)="onSelectListCount($event)" class="select-list"></app-selectlist>
+    </form>
+    <div *ngIf="successValue" class="alert alert-success alert-dismissible col-md-4 myAlert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>{{statusMessage}}</strong>
+    </div>
+    <div *ngIf="failureValue" class="alert alert-warning alert-dismissible col-md-4 myAlert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>{{statusMessage}}</strong>
+    </div>
+    <div class="refreshBtn" title="refresh" (click)="getFileInfo()">
+
+      <button class="btn btn-sm refreshIcon">
+        <span>
+           <i class="fas fa-sync"></i>
+        </span>
+        <span>
+          &nbsp;Refresh
+        </span>
+      </button>
+    </div>
+  </div>
+  <table class="table table-hover table-striped">
+
+    <thead>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Duration</th>
+      <th>Status</th>
+      <th>Job Id</th>
+      <th>Customer Id</th>
+      <th>Uploaded Date (PST)</th>
+      <th>Copy Link</th>
+      <th>Download</th>
+      <th>Retry</th>
+      <th>Delete</th>
+    </thead>
+    <tbody class="fileList">
+      <ng-container *ngFor="let file of filesInfo | filter: searchText; trackBy: trackByData; let i = index">
+        <tr *ngIf="selectedListCount==='All' || selectedListCount==file.Status">
+          <td class="fileName">
+            <span [title]="file.FileName" class="editFile" *ngIf="!(authService.getRole() ==='Editor')">
+
+              <a (click)="editFile(file.Guid, file.FileName, file.Status, i)">{{file.FileName}}</a>
+            </span>
+            <span [title]="file.FileName" *ngIf="(authService.getRole() ==='Editor')">
+
+              {{file.FileName}}
+            </span>
+          </td>
+          <td>{{file.Size | number : '1.2-2'}}&nbsp;MB</td>
+          <td>{{dataService.formatTime(file.Duration)}}</td>
+          <td>{{file.Status}}</td>
+          <td>
+            <span class="ids" [title]="file.JobId">{{file.JobId}}</span>
+          </td>
+          <td>
+            <span class="ids" [title]="file.CustomerId">{{file.CustomerId}}</span>
+          </td>
+          <td>{{uploadedTimeArray[i]}}</td>
+          <td class="editLink">
+            <ng-template #popContent>
+              <b>Link Copied</b>!</ng-template>
+
+            <button *ngIf="(file.Status === 'Completed')" type="button" class="btn btn-sm btn-primary" [ngbPopover]="popContent" #popover="ngbPopover"
+              (click)="copyToClipboard(file.Guid, file.FileName, popover, i)">
+              <span>
+                <i class="fas fa-link"></i>
+              </span>
+              <span>Copy Link</span>
+            </button>
+          </td>
+          <td class="downloadIcon">
+            <a *ngIf="(file.Status === 'Completed')" target="_blank" title="Download Transcript" class="downloadLink" [href]="dataService.downloadLinks[i]">
+              <i class="fas fa-2x fa-download"></i>
+            </a>
+          </td>
+          <td>
+            <span *ngIf="!(file.Status === 'Completed')" class="retryIcon" (click)="retryFile(file.WatsonJobId)">
+              <i class="fas fa-redo"></i>
+            </span>
+          </td>
+          <td>
+            <span class="deleteIcon" (click)="onClickDeleteFile(file.Guid, file.FileName, deletePopUp)">
+
+              <i class="fas fa-trash"></i>
+            </span>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #deletePopUp>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete File {{curfileToDelete}}?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="deleteText">Are you sure to delete this file?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning" (click)="deleteFile()">Yes</button>
+    <button type="button" class="btn btn-danger" (click)="close()">Close</button>
+  </div>
+</ng-template>-->
+<si-spinner *ngIf="loading"></si-spinner>
+<section>
+  <div class="container-fluid">
+    <div class="row cr-links">
+      <div class="col-sm-4">
+        <a href="">Home</a>>
+        <a href="">Call Recording</a><br />
+      </div>
+    </div>
+
+    <div class="row cr-heading">
+      <div class="col-md-3">
+        <h5>Call Recordings</h5>
+      </div>
+      <div class="offset-md-8 col-md-1">
+        <i style="font-size:24px;color:#172C47" class="fa">&#xf137;</i>
+        <i class="fa cr-icons">&#xf021;</i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">All()</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Processing()</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Completed()</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Uploaded Date(PST)</th>
+                <th>Customer<br />Satisfaction</th>
+                <th>Agent<br />Performance</th>
+                <th>RedAlert</th>
+                <th>Copy Url</th>
+                <th>Analytics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

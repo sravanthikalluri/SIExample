@@ -1,0 +1,37 @@
+<header>
+  <div class="row">
+    <div class="col">
+      <img src="../../../assets/images/Logo_Final.png" class="siLogo" alt="logo" />
+    </div>
+    <div class="col customerLogo">
+      <!-- <div class="logoText">
+        <div class="logoTextInner">
+          <div class="customerLogoText">CUSTOMER LOGO</div>
+          <div class="blurAdmin">
+            <span class="blur">Blur</span>Admin
+          </div>
+        </div>
+      </div> -->
+      <img src="../../../assets/images/press-ganey-holdings-inc-logo.png" alt="">
+    </div>
+    <div class="col headerRight">
+      <ul class="headerMenu">
+        <li (click)="home()">Home
+          <span>
+            <i class="fas fa-home"></i>
+          </span>
+        </li>
+        <li (click)="doLogout()">Logout
+          <span class="logoutIcon">
+            <i class="fas fa-power-off"></i>
+          </span>
+        </li>
+        <li class="profileMenu"><a [routerLink]="['profile']">Profile</a>
+          <span>
+            <i class="fas fa-user"></i>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
